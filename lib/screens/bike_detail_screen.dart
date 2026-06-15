@@ -27,18 +27,30 @@ class _BikeDetailScreenState extends State<BikeDetailScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
-          onPressed: () => Navigator.pop(context),
+        leading: Semantics(
+          label: 'Back',
+          button: true,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black87),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.black87),
-            onPressed: () {},
+          Semantics(
+            label: 'Add to favorites',
+            button: true,
+            child: IconButton(
+              icon: const Icon(Icons.favorite_border, color: Colors.black87),
+              onPressed: () {},
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.share, color: Colors.black87),
-            onPressed: () {},
+          Semantics(
+            label: 'Share bike',
+            button: true,
+            child: IconButton(
+              icon: const Icon(Icons.share, color: Colors.black87),
+              onPressed: () {},
+            ),
           ),
         ],
       ),
@@ -80,16 +92,16 @@ class _BikeDetailScreenState extends State<BikeDetailScreen> {
                                   Text(
                                     widget.bike.name,
                                     style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 28,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: 8),
                                   Text(
                                     widget.bike.brand,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
-                                      color: Colors.grey[600],
+                                      color: Color(0xFF757575),
                                     ),
                                   ),
                                 ],
@@ -123,24 +135,24 @@ class _BikeDetailScreenState extends State<BikeDetailScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 24),
                         Text(
                           '\$${widget.bike.price.toStringAsFixed(2)}',
                           style: const TextStyle(
-                            fontSize: 28,
+                            fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF2196F3),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
                         const Text(
                           'Available Colors',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
                         Wrap(
                           spacing: 12,
                           children: widget.bike.colors.map((color) {
@@ -175,24 +187,24 @@ class _BikeDetailScreenState extends State<BikeDetailScreen> {
                             );
                           }).toList(),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
                         const Text(
                           'Description',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
                         Text(
                           widget.bike.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
-                            color: Colors.grey[700],
+                            color: Color(0xFF757575),
                             height: 1.5,
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
                         Row(
                           children: [
                             Container(
@@ -240,10 +252,14 @@ class _BikeDetailScreenState extends State<BikeDetailScreen> {
                     border: Border.all(color: const Color(0xFF2196F3)),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    color: const Color(0xFF2196F3),
-                    onPressed: () {},
+                  child: Semantics(
+                    label: 'Add to cart',
+                    button: true,
+                    child: IconButton(
+                      icon: const Icon(Icons.shopping_cart_outlined),
+                      color: const Color(0xFF2196F3),
+                      onPressed: () {},
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16),

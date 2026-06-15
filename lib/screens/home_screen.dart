@@ -45,18 +45,26 @@ class _HomeScreenState extends State<HomeScreen> {
           'Cycle Shop',
           style: TextStyle(
             color: Colors.black87,
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black87),
-            onPressed: () {},
+          Semantics(
+            label: 'Search bikes',
+            button: true,
+            child: IconButton(
+              icon: const Icon(Icons.search, color: Colors.black87),
+              onPressed: () {},
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
-            onPressed: () {},
+          Semantics(
+            label: 'Shopping cart',
+            button: true,
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black87),
+              onPressed: () {},
+            ),
           ),
         ],
       ),
@@ -88,36 +96,67 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
               'Featured Bikes',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: filteredBikes.length,
-              itemBuilder: (context, index) {
-                return BikeCard(
-                  bike: filteredBikes[index],
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BikeDetailScreen(bike: filteredBikes[index]),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            child: filteredBikes.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.pedal_bike,
+                          size: 80,
+                          color: Colors.grey[400],
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No bikes found',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Try selecting a different category',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF757575),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemCount: filteredBikes.length,
+                    itemBuilder: (context, index) {
+                      return BikeCard(
+                        bike: filteredBikes[index],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  BikeDetailScreen(bike: filteredBikes[index]),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
           ),
         ],
       ),
